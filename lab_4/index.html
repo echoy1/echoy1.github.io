@@ -1,20 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lab 4</title>
-    <link src="./style.css" type="text/stylesheet" />
-</head>
-<body>
-    <div>
-        <h1 class="header">Lab 4 Header</h1>
-    </div>
-    <div class="content">
-        hello world
+  <head>
+    <title>Prof A's Demo Page</title>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div class="header">Prof A's Demo Page</div>
+        <button class="button" onclick="clickMe()">
+          Click me to make a change
+        </button>
+        <div class="content">
+          <p>
+            Retro fam narwhal hoodie meggings viral bushwick yr chartreuse.
+            Chartreuse seitan banh mi selfies, woke ennui venmo craft beer. Air
+            plant tumeric retro DIY iPhone poutine. +1 gastropub chillwave,
+            cronut glossier pork belly tacos poke next level fanny pack vegan
+            jianbing lo-fi.
+          </p>
+        </div>
+        <div class="footer"></div>
+      </div>
     </div>
     <script>
+      var fullname = "Eric Choy";
+      var first = fullname.substring(0,4);
+      var last = fullname.substring(5,9);
+      var total = first.length + last.length;
+
+      document.getElementsByClassName("header")[0].innerHTML =
+        "Eric Choy's Lab 4" + " " + total;
+
+      var para1 = document.createElement("p");
+      var node1 = document.createTextNode("my name has 4 characters");
+      para1.appendChild(node1);
+
+      var para2 = document.createElement("p");
+      var node2 = document.createTextNode("the third character in my name is I")
+      var node3 = document.createTextNode("hoy");
+      para2.appendChild(node2);
+      var linebreak = document.createElement("br");
+      para2.appendChild(linebreak);
+      para2.appendChild(node3);
+      
+
+      function clickMe() {
+        const content = document.querySelector(".content");
+        content.innerHTML = "Hello world";
+        document.getElementsByClassName("content")[0].appendChild(para1);
+        document.getElementsByClassName("content")[0].appendChild(para2);
+
+      }
+      
+      
+
     </script>
-</body>
+  </body>
 </html>
