@@ -1,6 +1,8 @@
 h1, h2 {
   font-family: helvetica, arial, sans-serif;
   text-align: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 body {
@@ -21,7 +23,7 @@ body {
   left: 0;
   width: 640px;
   height: 480px;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0,0,0,0.5);
 }
 
 button {
@@ -35,6 +37,10 @@ button {
   left: 2px;
 }
 
+.thumb-bar {
+  display: flex;
+}
+
 .thumb-bar img {
   display: block;
   width: 20%;
@@ -42,3 +48,10 @@ button {
   cursor: pointer;
 }
 
+.displayed-img {
+  width: 640px;
+  height: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
