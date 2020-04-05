@@ -8,19 +8,22 @@ body {
 h1 {
     display: flex;
     justify-content: center;
+    font-weight: bold;
 }
 form {
-    margin: 0 auto;
-    width: 400px;
-    padding: 1em;
-    border: 1px solid #ccc;
-    border-radius: 1em;
+    position: absolute;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-family: Helvetica, Geneva, Tahoma, sans-serif;
   }
   
   label {
-    display: inline-block;
+    display: flex;
     width: 90px;
-    text-align: right;
+    font-weight: bold;
   }
   
   input,
@@ -41,7 +44,7 @@ form {
     margin: 0;
   }
 
-  .button {
+  button {
     background-color: #ffc477;
     -moz-border-radius: 11px;
     -webkit-border-radius: 11px;
@@ -55,4 +58,14 @@ form {
     padding: 10px 17px;
     text-decoration: none;
     text-shadow: 0px 1px 1px #cc9f52;
+  }
+
+  button:hover {
+    background-color: coral;
+    border: 2px solid rgb(216, 91, 46);
+  }
+  
+  button:active {
+    position: relative;
+    top: 1px;
   }
