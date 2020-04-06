@@ -14,6 +14,18 @@
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""
     ></script>
+    <style>
+      #map1 {
+        width: 640px;
+        height: 480px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 12px;
+        font-style: oblique;
+        font-weight: bold;
+
+      }
+      
+    </style>
   </head>
 
   <body>
@@ -21,13 +33,40 @@
       <div class="wrapper">
         <div class="header">Frontend Libraries: Maps Lab</div>
         <div class="content">
-          When your lab is done, this should be replaced with a stylish map.
+          <div id="map1"></div>
         </div>
         <div class="footer">Make some markers work!</div>
       </div>
     </div>
     <script>
-        /* Your lab code can go here, or in an external file you include */
+      /* Your lab code can go here, or in an external file you include */
+      const mymap = L.map("map1").setView([38.9936, -76.9452], 10);
+      L.tileLayer(
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+        {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: "mapbox/streets-v11",
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken: "pk.eyJ1IjoiZWNob3kzMTIiLCJhIjoiY2s4bm5ycDdxMHJ2MzNqbzgycGN6aG90YiJ9.7Hi5jnaGRkuRoq37_Mnuxw"
+        }
+      ).addTo(mymap);
+      const mark1 = L.marker([38.9936, -76.9452], {title: "Eppley Rec Center"}).addTo(mymap);
+      const str1 = "<b>Eppley Rec Centre</b>";
+      mark1.bindPopup(str1).openPopup();
+
+      const place1 = {name:"China Bay", latitude:38.830166, longitude:-76.941712}
+      const place2 = {name:"McDonalds", latitude:38.901794, longitude:-76.90064}
+      const place3 = {name:"La Cocina De Mi Tierra", latitude:38.86227, longitude:-76.897974}
+
+      let places = [place1, place2, place3];
+
+      for (let i = 0; i <3; i++) {
+        L.marker([places[i].latitude, places[i].longitude], {title: places[i].name}).addTo(mymap).bindPopup(places[i].name.bold()).openPopup();
+
+      }
     </script>
   </body>
 </html>
