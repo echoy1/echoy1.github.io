@@ -10,22 +10,71 @@
       <div class="wrapper">
         <div class="header">Frontend Libraries: Charts Lab</div>
         <div class="content">
-          When your lab is done, this should be replaced with a useful chart full of food data.
+          <div id="chartContainer" style="height: 300px; width: 100%;"></div>
         </div>
         <div class="footer">Let's eat out in the future!</div>
       </div>
     </div>
     <script>
-      fetch(' https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json') // replace this with the food safety data set
-      .then((response) => {
-        console.log("response information", response);
-        return response;
-      })
-      .then((data) => data.json()) // this is an "implicit return" - we're returning the results of the Fetch request to the next step.
-        .then((data) => { // this is an explicit return. If I want my information to go further, I'll need to use the "return" keyword before the brackets close
+      fetch(" https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json") // replace this with the food safety data set
+        .then((response) => {
+          console.log("response information", response);
+          return response;
+        })
+        .then((data) => data.json()) // this is an "implicit return" - we're returning the results of the Fetch request to the next step.
+        .then((data) => {
+          // this is an explicit return. If I want my information to go further, I'll need to use the "return" keyword before the brackets close
           console.log(data);
           // return data; // <- this will pass the data to the next "then" statement when I'm ready.
+          const clear = data.filter((f) => f.geocoded_column_1);
+          const newArray = clear.map((m) => ({
+            category: m.category,
+            name: m.name,
+            latLong: m.geocoded_column_1.coordinates,
+          }));
+          return newArray;
         })
+        .then((data) => {
+          return data.reduce((result, current) => {
+            if (!result[current.category]) {
+              result[current.category] = [];
+            }
+            result[current.category].push(current);
+            return result;
+          }, {});
+        })
+        .then((data) => {
+          console.log("Data", data);
+          const format = Object.entries(data).map((m, i) => {
+            console.log(m);
+            return {
+              y: m[1].length,
+              label: m[0],
+            };
+          });
+          return format;
+        })
+        .then((results) => {
+          console.log(results);
+          const chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+              text: "Percentage of Food Places",
+            },
+            data: [
+              {
+                type: "doughnut",
+                startAngle: 60,
+                //innerRadius: 60,
+                indexLabelFontSize: 17,
+                indexLabel: "{label} - #percent%",
+                toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+                dataPoints: results
+              },
+            ],
+          });
+          chart.render();
+        });
     </script>
   </body>
 </html>
