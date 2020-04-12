@@ -56,7 +56,20 @@
         })
         .then((results) => {
           console.log(results);
+          CanvasJS.addColorSet("colors",
+          [//Array of Colors
+          "blue",
+          "red",
+          "green",
+          "yellow",
+          "purple",
+          "orange",
+          "aqua",
+          "deeppink",
+          "turquoise"
+        ])
           const chart = new CanvasJS.Chart("chartContainer", {
+            colorSet: "colors",
             animationEnabled: true,
             title: {
               text: "Percentage of Food Places",
